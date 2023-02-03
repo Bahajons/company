@@ -1,0 +1,1 @@
+export const API = `https://btest.gazon-tashkent.uz/`
