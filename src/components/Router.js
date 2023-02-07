@@ -1,12 +1,18 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import AddCompetition from './competition/AddCompetition'
+import Competition from './competition/Competition'
+import EditCompetition from './competition/EditCompetition'
 import Main from './Main'
 import Navbar from './Navbar'
 import Forgot from './user/Forgot'
 import Login from './user/Login'
+import Logout from './user/Logout'
+import Profile from './user/Profile'
 import Register from './user/Register'
 import SetPassword from './user/SetPassword'
 import Verify from './user/Verify'
+import PrivateRouter from './utils/PrivateRouter'
 
 
 export default function Router() {
@@ -15,13 +21,21 @@ export default function Router() {
 
       <BrowserRouter>
         <Navbar />
+
         <Routes>
+
           <Route path='/' element={<Main />} />
           <Route path='/register' element={<Register />} />
           <Route path='/verify' element={<Verify />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/logout' element={<Logout />} />
           <Route path='/forgot' element={<Forgot />} />
           <Route path='/setpassword' element={<SetPassword />} />
+
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/competition' element={<Competition />} />
+          <Route path='/competition/add' element={<AddCompetition />} />
+          <Route path='/competition/:slug' element={<EditCompetition />} />
         </Routes>
 
       </BrowserRouter>

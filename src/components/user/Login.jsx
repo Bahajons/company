@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../api_fetch';
-
+import Swal from 'sweetalert2'
+import { useDispatch } from 'react-redux';
 export default function Login() {
 
   const navigate = useNavigate()
   const [error, setError] = useState()
+  const dispatch = useDispatch()
   const [user, setUser] = useState({
     phone: '',
     password: ''
@@ -13,15 +15,21 @@ export default function Login() {
   })
   const [check, setCheck] = useState(false)
 
-
   async function login_user(e) {
 
-    if (user.phone.length && user.password) {
+    if (user.phone.length > 7 && user.password) {
       e.preventDefault()
       try {
         const result = await login(user)
         console.log(result);
+        localStorage.setItem('token', result?.data?.access)
+        Swal.fire(
+          'Success',
+          'You entered successfully',
+          'success'
+        )
         navigate('/')
+        dispatch({ type: 'USER', payload: result?.data?.user })
       } catch (error) {
         setError(error)
         console.log(error);

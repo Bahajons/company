@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { verify } from '../api_fetch'
+import Swal from 'sweetalert2'
 
 export default function Verify() {
 
@@ -19,11 +20,17 @@ export default function Verify() {
 
       try {
         const result = await verify(user)
-
         console.log(result);
         navigate('/login')
+        localStorage.removeItem('phone')
+        Swal.fire(
+          'Success',
+          'Your profile verified successfully',
+          'success'
+        )
       } catch (error) {
         setError(error)
+
         console.log(error);
       }
     }
@@ -45,9 +52,9 @@ export default function Verify() {
                 onChange={(e) => { setUser({ ...user, [e.target.id]: e.target.value }); setError('') }}
                 required maxLength={5} minLength={5}
               />
-              <div id="emailHelp" className="form-text text-danger">{error?.response?.data?.phone[0]}</div>
+              <div id="emailHelp" className="form-text text-danger">{error?.response?.data.code}</div>
             </div>
-            <div className="col-3 offset-1 col-md-2" style={{marginTop:'33px'}}>
+            <div className="col-3 offset-1 col-md-2" style={{ marginTop: '33px' }}>
               <button type="submit" className="btn btn-primary" onClick={(e) => { verify_user(e); }}>Verify</button>
             </div>
           </form>
