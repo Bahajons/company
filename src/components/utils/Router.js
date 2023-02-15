@@ -1,18 +1,19 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import AddCompetition from './competition/AddCompetition'
-import Competition from './competition/Competition'
-import EditCompetition from './competition/EditCompetition'
-import Main from './Main'
-import Navbar from './Navbar'
-import Forgot from './user/Forgot'
-import Login from './user/Login'
-import Logout from './user/Logout'
-import Profile from './user/Profile'
-import Register from './user/Register'
-import SetPassword from './user/SetPassword'
-import Verify from './user/Verify'
-import PrivateRouter from './utils/PrivateRouter'
+import AddCompetition from '../competition/AddCompetition'
+import Competition from '../competition/Competition'
+import EditCompetition from '../competition/EditCompetition'
+import Main from '../Main'
+import Navbar from '../Navbar'
+import AddQuestion from '../questions/AddQuestion'
+import Question from '../questions/Question'
+import Forgot from '../user/Forgot'
+import Login from '../user/Login'
+import Logout from '../user/Logout'
+import Profile from '../user/Profile'
+import Register from '../user/Register'
+import SetPassword from '../user/SetPassword'
+import Verify from '../user/Verify'
 
 
 export default function Router() {
@@ -36,6 +37,8 @@ export default function Router() {
           <Route path='/competition' element={<Competition />} />
           <Route path='/competition/add' element={<AddCompetition />} />
           <Route path='/competition/:slug' element={<EditCompetition />} />
+          <Route path='/questions/:slug' element={<Question />} />
+          <Route path='/questions/add/:slug' element={<AddQuestion />} />
         </Routes>
 
       </BrowserRouter>

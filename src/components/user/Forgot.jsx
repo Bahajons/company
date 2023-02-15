@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { forgot, verify } from '../api_fetch'
+import { forgot, verify } from '../utils/api_fetch'
 
 export default function Forgot() {
 

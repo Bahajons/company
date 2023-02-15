@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { verify } from '../api_fetch'
+import { verify } from '../utils/api_fetch'
 import Swal from 'sweetalert2'
 
 export default function Verify() {

@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './custom.css'
 import { useReducer } from './components/reducer/useReducer';
 import { Provider } from 'react-redux';
+import 'bootstrap/dist/js/bootstrap.min.js'
 import { legacy_createStore as createStore } from 'redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

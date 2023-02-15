@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { API } from './API';
-const { get, post, put, del, patch } = axios
-
+const { get, post, put, patch, } = axios
 const Axios = () => {
   const token = localStorage.getItem('token');
   const defaultOptions = {
@@ -22,7 +21,7 @@ const Axios = () => {
       patch(url, data, { ...defaultOptions, ...options }),
     put: (url, data, options = {}) =>
       put(url, data, { ...defaultOptions, ...options }),
-    delete: (url, options = {}) => del(url, { ...defaultOptions, ...options }),
+    deleteItem: (url, options = {}) => axios.delete(url, { ...defaultOptions, ...options }),
   };
 };
 export default Axios;

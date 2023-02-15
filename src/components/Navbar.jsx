@@ -14,10 +14,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Toolbar } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link, useNavigate } from 'react-router-dom';
-import { NavbarStyle } from './style-component/NavbarStyle';
+import { NavbarStyle } from '../styleComponent/NavbarStyle';
 import MenuIcon from '@mui/icons-material/Menu';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import { get_profile } from './api_fetch';
+import { get_profile } from './utils/api_fetch';
 import { useSelector } from 'react-redux';
 
 export default function Navbar() {
@@ -25,7 +25,13 @@ export default function Navbar() {
   const [state, setState] = React.useState({
     left: false,
   });
-  const [avatar, setAvatar] = React.useState()
+  const [user, setUser] = React.useState({
+    first_name: '',
+    last_name: '',
+    avatar: '',
+    phone: '',
+    role: ''
+  })
   const selector = useSelector(state => state)
 
   function navigate(to) {
@@ -34,18 +40,25 @@ export default function Navbar() {
   }
 
   async function get_image() {
-    try {
-      const user_avatar = await get_profile()
-      console.log(user_avatar.data.avatar)
-      setAvatar(user_avatar.data)
-    } catch (error) {
+    if (localStorage.getItem('token')) {
 
+      try {
+        const user_avatar = await get_profile()
+        console.log(user_avatar.data.avatar)
+        setUser(user_avatar.data)
+      } catch (error) {
+        setUser('')
+      }
     }
+    else {
+      setUser('')
+    }
+
   }
 
   React.useEffect(() => {
     get_image()
-  }, [])
+  }, [state.left])
 
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -63,16 +76,16 @@ export default function Navbar() {
     //   onClick={toggleDrawer(anchor, false)}
     //   onKeyDown={toggleDrawer(anchor, false)}
     >
-      {avatar?.first_name ?
+      {user?.first_name ?
         <List>
-          <ListItem disablePadding >
+          <ListItem className='py-1 px-2'  >
             <ListItemButton>
               <div className='d-flex align-items-center'>
-                <div style={{ width: '70px', height: '70px', marginRight: '10px', border: '1px solid #a1a1a1', borderRadius: '50%', overflow: 'hidden' }} disablePadding>
-                  <img src={avatar?.avatar} className='w-100' alt="" />
+                <div className='py-1 px-2' style={{ width: '70px', height: '70px', marginRight: '10px', border: '1px solid #a1a1a1', borderRadius: '50%', overflow: 'hidden' }} >
+                  <img src={user?.avatar} className='w-100' alt="" />
                 </div>
                 <div className='pt-2'>
-                  <p>{avatar?.first_name} <br /> {avatar?.last_name}</p>
+                  <span>{user?.first_name} <br /> {user?.last_name}</span>
                 </div>
               </div>
               <ListItemIcon>
@@ -82,9 +95,9 @@ export default function Navbar() {
         </List> : <Toolbar />}
       {/*  */}
       <Divider />
-      <List>
+      {/* <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+          <ListItem key={text} className='py-1 px-2'>
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -93,11 +106,11 @@ export default function Navbar() {
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </List> */}
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem key={text} className='py-1 px-2'>
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -105,20 +118,32 @@ export default function Navbar() {
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
-        ))}
+        ))} */}
       </List>
-      <List>
-        <ListItem disablePadding onClick={() => navigate('/competition')} >
+      {user?.role == 2 ?
+        <List>
+          <ListItem className='py-1 px-2' onClick={() => navigate('/competition')} >
+            <ListItemButton>
+              <ListItemIcon>
+                <BusinessCenterIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Competition'} />
+            </ListItemButton>
+          </ListItem>
+        </List> : ''
+      }
+      {/* <List>
+        <ListItem className='py-1 px-2' onClick={() => navigate('/question')} >
           <ListItemButton>
             <ListItemIcon>
               <BusinessCenterIcon />
             </ListItemIcon>
-            <ListItemText primary={'Competition'} />
+            <ListItemText primary={'Question'} />
           </ListItemButton>
         </ListItem>
-      </List>
+      </List> */}
       <List onClick={() => navigate('/profile')}>
-        <ListItem disablePadding>
+        <ListItem className='py-1 px-2'>
           <ListItemButton>
             <ListItemIcon>
               <PersonIcon />
@@ -127,27 +152,28 @@ export default function Navbar() {
           </ListItemButton>
         </ListItem>
       </List>
-      {localStorage.getItem('token') ?
-        <List onClick={() => navigate('/logout')}>
-          <ListItem >
-            <ListItemButton>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Log out'} />
-            </ListItemButton>
-          </ListItem>
-        </List> :
-        <List onClick={() => navigate('/login')}>
-          <ListItem >
-            <ListItemButton>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Log in'} />
-            </ListItemButton>
-          </ListItem>
-        </List>
+      {
+        localStorage.getItem('token') ?
+          <List onClick={() => navigate('/logout')}>
+            <ListItem className='text-danger'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LogoutIcon className='text-danger' />
+                </ListItemIcon>
+                <ListItemText primary={'Log out'} />
+              </ListItemButton>
+            </ListItem>
+          </List> :
+          <List onClick={() => navigate('/login')}>
+            <ListItem className='text-primary'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LogoutIcon className='text-primary' />
+                </ListItemIcon>
+                <ListItemText primary={'Log in'} />
+              </ListItemButton>
+            </ListItem>
+          </List>
       }
     </Box >
   );
@@ -158,14 +184,13 @@ export default function Navbar() {
         <Button onClick={toggleDrawer('left', true)}>
           <MenuIcon className='icon' />
         </Button>
-
       </div>
 
 
 
 
 
-      <React.Fragment key={'left'}>
+      <div key={'left'}>
         <Drawer
           anchor={'left'}
           open={state['left']}
@@ -174,7 +199,7 @@ export default function Navbar() {
 
           {list('left')}
         </Drawer>
-      </React.Fragment>
+      </div>
     </NavbarStyle>
   );
 }

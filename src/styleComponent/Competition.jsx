@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const CompetitionStyled = styled.div`
-   
-   ul{
+      ul{
     li{
       list-style: none;
       .competition{
@@ -17,6 +16,4 @@ export const CompetitionStyled = styled.div`
    }
 
 
-
-    
 `

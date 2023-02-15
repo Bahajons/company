@@ -18,13 +18,12 @@ export default function Logout() {
                 'You loged out',
                 'success', {
                 preConfirm: () => {
-                    return window.location.reload();
+                    return
                 }
             }
             )
             dispatch({ type: 'LOGOUT' })
             return navigate('/')
-
         },
         preDeny: () => {
             return navigate(-1)

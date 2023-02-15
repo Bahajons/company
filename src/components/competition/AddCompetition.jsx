@@ -1,14 +1,16 @@
 import { Input, TextField } from '@mui/material'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Editor } from 'tinymce';
-import { add_competition } from '../api_fetch'
+import { add_competition, get_question_all } from '../utils/api_fetch'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 
 export default function AddCompetition() {
 
   const [image_avatar, setImage_avatar] = useState()
+  const navigate = useNavigate()
   const [image_show, setImage_show] = useState()
 
   const [competition, setCompetition] = useState({
@@ -45,6 +47,7 @@ export default function AddCompetition() {
         'success'
       )
       clear()
+      navigate(-1)
     } catch (error) {
       console.log(error);
     }
@@ -71,6 +74,19 @@ export default function AddCompetition() {
       full_description: '<p></p>'
     })
   }
+  async function get_question() {
+    try {
+      const result = await get_question_all()
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+  useEffect(() => {
+    get_question()
+  }, [])
+
 
   return (
     <div>
@@ -82,7 +98,7 @@ export default function AddCompetition() {
               <div>
                 <label htmlFor="name" className="form-label">Name competition</label>
                 <input type="text" id="name" className="form-control" placeholder='Name'
-                 value={competition?.name}
+                  value={competition?.name}
                   onChange={(e) => { setCompetition({ ...competition, [e.target.id]: e.target.value }) }}
                   required minLength={3} />
               </div>
@@ -148,15 +164,15 @@ export default function AddCompetition() {
             </div>
 
             <div className="mb-3 col-md-3 col-6">
-              <label htmlFor="duration" className="form-label">Duration</label>
+              <label htmlFor="duration" className="form-label">Duration(min)</label>
               <input type="number" id="duration" className="form-control" placeholder='30'
                 value={competition?.duration}
                 onChange={(e) => { setCompetition({ ...competition, [e.target.id]: e.target.value }) }}
                 required />
             </div>
             <div className="mb-3 col-md-3 col-6">
-              <label htmlFor="price" className="form-label">Price</label>
-              <input type="text" id="price" className="form-control" placeholder='5600'
+              <label htmlFor="price" className="form-label">Price(so'm)</label>
+              <input type="number" id="price" className="form-control" placeholder='5600'
                 value={competition?.price}
                 onChange={(e) => { setCompetition({ ...competition, [e.target.id]: e.target.value }) }}
                 required minLength={3} />
