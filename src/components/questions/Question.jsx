@@ -30,7 +30,7 @@ export default function Question() {
 
       <div className="container">
         <div className="div">
-          <h5 className='text-center pt-4'>List of answers</h5>
+          <h5 className='text-center pt-4'>List of questions</h5>
           <div className='d-flex justify-content-end'>
             <button className='btn btn-primary btn-sm' onClick={() => navigate(`/questions/add/${slug}`)}>Add competition</button>
           </div>
