@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { QuestionStyle } from '../../styleComponent/Questions';
 import { get_question_all } from '../utils/api_fetch';
+import MathShow from '../utils/MathShow';
 
 export default function Question() {
 
@@ -32,23 +33,26 @@ export default function Question() {
         <div className="div">
           <h5 className='text-center pt-4'>List of questions</h5>
           <div className='d-flex justify-content-end'>
-            <button className='btn btn-primary btn-sm' onClick={() => navigate(`/questions/add/${slug}`)}>Add competition</button>
+            <button className='btn btn-primary btn-sm' onClick={() => navigate(`/question/add/${slug}`)}>Add question</button>
           </div>
           {console.log(questions)}
-          <div>
+          <div className='pb-3'>
             {questions.map((item, index) => {
               return (
                 <div className='question' key={index}>
                   <h6><span>{index + 1}. </span> {item?.name}</h6>
                   <>
-                    <i>Ball: </i><i>{item?.ball} </i>
+                    <i>Ball: </i><i>{item?.ball} </i><br />
                     {item?.description ?
                       <>
-                        <i> {'Description:'} </i><i>{item.description}</i>
+                        <i> {'Note:'} </i><div className='note'>{<MathShow text={item?.description} />}</div>
                       </>
                       : ''
                     }
                   </>
+                  <div className="d-flex justify-content-end">
+                    <Link className='nav-link text-primary' to={`/question/edit/${slug}/${item?.id}`}>Edit</Link>
+                  </div>
                 </div>
               )
             })}

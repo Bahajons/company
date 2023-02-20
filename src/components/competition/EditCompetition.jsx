@@ -8,6 +8,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import DeleteIcon from '@mui/icons-material/Delete';
+
+
 export default function EditCompetition() {
 
 

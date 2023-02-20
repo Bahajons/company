@@ -6,6 +6,7 @@ import EditCompetition from '../competition/EditCompetition'
 import Main from '../Main'
 import Navbar from '../Navbar'
 import AddQuestion from '../questions/AddQuestion'
+import EditQuestion from '../questions/EditQuestion'
 import Question from '../questions/Question'
 import Forgot from '../user/Forgot'
 import Login from '../user/Login'
@@ -38,7 +39,8 @@ export default function Router() {
           <Route path='/competition/add' element={<AddCompetition />} />
           <Route path='/competition/:slug' element={<EditCompetition />} />
           <Route path='/questions/:slug' element={<Question />} />
-          <Route path='/questions/add/:slug' element={<AddQuestion />} />
+          <Route path='/question/add/:slug' element={<AddQuestion />} />
+          <Route path='/question/edit/:slug/:id' element={<EditQuestion />} />
         </Routes>
 
       </BrowserRouter>
