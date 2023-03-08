@@ -132,6 +132,18 @@ export default function Navbar() {
           </ListItem>
         </List> : ''
       }
+      {user?.role == 2 ?
+        <List>
+          <ListItem className='py-1 px-2' onClick={() => navigate('/competition/promocode')} >
+            <ListItemButton>
+              <ListItemIcon>
+                <BusinessCenterIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Promocode'} />
+            </ListItemButton>
+          </ListItem>
+        </List> : ''
+      }
       {/* <List>
         <ListItem className='py-1 px-2' onClick={() => navigate('/question')} >
           <ListItemButton>

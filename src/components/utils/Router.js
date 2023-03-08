@@ -5,6 +5,8 @@ import Competition from '../competition/Competition'
 import EditCompetition from '../competition/EditCompetition'
 import Main from '../Main'
 import Navbar from '../Navbar'
+import EditPromocode from '../promocode/EditPromocode'
+import Promocode from '../promocode/Promocode'
 import AddQuestion from '../questions/AddQuestion'
 import EditQuestion from '../questions/EditQuestion'
 import Question from '../questions/Question'
@@ -38,8 +40,11 @@ export default function Router() {
           <Route path='/competition' element={<Competition />} />
           <Route path='/competition/add' element={<AddCompetition />} />
           <Route path='/competition/:slug' element={<EditCompetition />} />
+          <Route path='/competition/promocode' element={<Promocode />} />
+          <Route path='/competition/promocode/edit/:slug' element={<EditPromocode />} />
           <Route path='/questions/:slug' element={<Question />} />
           <Route path='/question/add/:slug' element={<AddQuestion />} />
+          <Route path='/question/add/:slug/:id' element={<AddQuestion />} />
           <Route path='/question/edit/:slug/:id' element={<EditQuestion />} />
         </Routes>
 

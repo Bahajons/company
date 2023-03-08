@@ -18,8 +18,6 @@ export default function Login() {
     password: ''
   })
   const [check, setCheck] = useState(false)
-  let err = {}
-
 
   async function login_user(e) {
     setLoader(true)

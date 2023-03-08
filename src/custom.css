@@ -8,3 +8,8 @@
     box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0.05);
     outline: 1px;
 }
+.form-select:active {
+    border: 1px solid #ced4da;
+    box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0.05);
+    outline: 1px;
+}

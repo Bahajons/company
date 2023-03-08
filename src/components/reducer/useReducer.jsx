@@ -1,17 +1,6 @@
 
 const initialState = {
-  user: {
-    first_name: '',
-    last_name: '',
-    middle_name: '',
-    gender: '',
-    birthday: '',
-    avatar: '',
-    phone: '',
-    address: '',
-    region: '',
-    city: ''
-  }
+  add_answer: ''
 }
 
 export const useReducer = (state = initialState, action) => {
@@ -24,27 +13,9 @@ export const useReducer = (state = initialState, action) => {
         id: action.payload
       }
     }
-    case 'USER': {
-      console.log(action.payload);
+    case 'ADD_ANSWER': {
       return {
-        ...state.user, ...action.payload
-      }
-    }
-    case 'LOGOUT': {
-      console.log(action.payload);
-      return {
-        ...state.user, ...{
-          first_name: '',
-          last_name: '',
-          middle_name: '',
-          gender: '',
-          birthday: '',
-          avatar: '',
-          phone: '',
-          address: '',
-          region: '',
-          city: ''
-        }
+        ...state, add_answer: action.payload
       }
     }
     default: {

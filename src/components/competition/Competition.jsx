@@ -51,7 +51,7 @@ export default function Competition() {
                     <div>
                       <Link className='nav-link' to={`/competition/${item.slug}`}>
                         <div className="competition">
-                          <h5>{item.name}</h5>
+                          <h5 className='text-primary'>{item.name}</h5>
                           <div className='d-flex'>
                             <p className='mb-1'><b>Start: </b>{item.start_date.replace('T', ' ').slice(0, -3)}</p>
                             <p className='mb-1' style={{ paddingLeft: '8px' }}><b>End: </b>{item.end_date.replace('T', ' ').slice(0, -3)}</p>

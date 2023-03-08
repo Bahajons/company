@@ -19,6 +19,22 @@ export const AddQuestionStyle = styled.div`
 .tox-statusbar{
 	display: none !important;
 }
+.tox-promotion{
+	a{
+		display: none;
+	}
+}
+
+`
+export const EditQuestionStyle = styled.div`
+.tox-statusbar{
+	display: none !important;
+}
+.tox-promotion{
+	a{
+		display: none;
+	}
+}
 
 
 `

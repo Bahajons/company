@@ -1,5 +1,3 @@
-import axios from "axios";
-import { API } from "./API";
 import Axios from "./Axios";
 
 // User
@@ -47,6 +45,23 @@ export {
     patch_detail_competition, delete_competition
 }
 
+//Promocode
+async function get_promocode(slug) {
+    return await Axios().get(`api/v1/edu/promo-code/${slug}/`)
+}
+async function post_promocode(slug, promocode) {
+    return await Axios().post(`api/v1/edu/promo-code/${slug}/`, promocode)
+}
+async function patch_promocode(slug, promocode) {
+    return await Axios().patch(`api/v1/edu/promo-code/${slug}/`, promocode)
+}
+async function delete_promocode(slug, id) {
+    return await Axios().deleteItem(`api/v1/edu/promo-code/${slug}/${id}/`)
+}
+
+export { get_promocode, post_promocode, patch_promocode, delete_promocode }
+
+
 // Questions
 
 async function get_question_all(slug) {
@@ -70,9 +85,21 @@ export { get_question_all, add_question, get_question_detail, patch_question, de
 // async function get_question_all(slug) {
 //     return await Axios().get(`api/v1/question/edu-questions/${slug}`)
 // }
-// async function add_question(slug, question) {
-//     return await Axios().post(`api/v1/question/edu-questions/${slug}/`, question)
-// }
-// export { get_question_all, add_question }
+async function get_answer_all(slug) {
+    return await Axios().get(`api/v1/question/edu-answers/${slug}/`)
+}
+async function get_answer_detail(slug, id) {
+    return await Axios().get(`api/v1/question/edu-answers/${slug}/${id}/`)
+}
+async function add_answer(slug, id, answer) {
+    return await Axios().post(`api/v1/question/edu-answers/${slug}/${id}/`, answer)
+}
+async function update_answer(slug, id_question, id_answer, answer) {
+    return await Axios().patch(`api/v1/question/edu-answers/${slug}/${id_question}/${id_answer}/`, answer)
+}
+async function delete_answer(slug, id, id_answer) {
+    return await Axios().deleteItem(`api/v1/question/edu-answers/${slug}/${id}/${id_answer}`)
+}
+export { add_answer, get_answer_all, get_answer_detail, update_answer, delete_answer }
 
 

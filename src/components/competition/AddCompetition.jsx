@@ -1,7 +1,7 @@
 import { Input, TextField } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 import { Editor } from 'tinymce';
-import { add_competition, get_question_all } from '../utils/api_fetch'
+import { add_competition, get_question_all, post_promocode } from '../utils/api_fetch'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Swal from 'sweetalert2'
@@ -24,6 +24,23 @@ export default function AddCompetition() {
     background: '',
     full_description: '<p></p>'
   })
+
+  const [promo, setPromo] = useState({
+    name: '',
+    competition: '',
+    percent: '',
+  })
+
+  async function promocode_post() {
+    try {
+      const result = await post_promocode()
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 
   async function competition_add(e) {
 
@@ -177,6 +194,18 @@ export default function AddCompetition() {
                 onChange={(e) => { setCompetition({ ...competition, [e.target.id]: e.target.value }) }}
                 required minLength={3} />
             </div>
+            {/* /////  Promo code //////  */}
+            {competition.price ?
+              <div className="mb-3 col-md-3 col-6">
+                <input type="range" className="form-range" min="0" max="10" step="0.1"
+                  onChange={(e) => console.log(e.target.value)} id="customRange3"
+                  value={promo.percent} />
+
+                <input type="range" id="percent" className="form-control" placeholder=''
+                  style={{ textTransform: 'uppercase' }}
+                  value={promo.percent}
+                  onChange={(e) => { setPromo({ ...promo, [e.target.type]: e.target.value }) }} />
+              </div> : ''}
             <div>
               <label htmlFor="full_description">Full description</label>
               <CKEditor
