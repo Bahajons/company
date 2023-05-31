@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Router from "./components/utils/Router";
 import { AppStyle } from "./styleComponent/AppStyle";
 import WifiOffIcon from '@mui/icons-material/WifiOff';
+import MathEditor from "./components/utils/MathEditor";
+import Matheditortest from "./components/utils/Matheditortest";
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);

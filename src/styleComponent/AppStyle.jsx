@@ -25,7 +25,12 @@ export const AppStyle = styled.div`
     }
   }
 
+  .wrs_editor{
 
+    td{
+      padding:0;
+    }
+  }
 
 
 `

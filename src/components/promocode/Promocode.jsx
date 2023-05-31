@@ -46,17 +46,19 @@ export default function Promocode() {
             </div>
           </div>
           <div className='d-flex justify-content-end'>
-            <Link className='nav-link text-primary' to={`/competition/promocode/edit/${item.slug}`} >Promocode <FastForwardIcon /></Link>
+            <Link className='nav-link text-primary' to={`/competition/promocode/${item.price}/${item.slug}`} >Promocode <FastForwardIcon /></Link>
           </div>
           {/* <hr/> */}
         </div>
       )
     }
   }
+
+
   return (
     <div>
       <div className="container">
-        <h5 className='text-center py-4'>Promo codes</h5>
+        <h5 className='text-center pt-4'>Promo codes</h5>
         <hr />
         {competition?.map((item, index) =>
           my_code(item, index)

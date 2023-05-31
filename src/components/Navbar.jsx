@@ -120,6 +120,18 @@ export default function Navbar() {
           </ListItem>
         ))} */}
       </List>
+      {user?.role ?
+        <List>
+          <ListItem className='py-1 px-2' onClick={() => navigate('/participation')} >
+            <ListItemButton>
+              <ListItemIcon>
+                <BusinessCenterIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Participated'} />
+            </ListItemButton>
+          </ListItem>
+        </List> : ''
+      }
       {user?.role == 2 ?
         <List>
           <ListItem className='py-1 px-2' onClick={() => navigate('/competition')} >
@@ -154,16 +166,18 @@ export default function Navbar() {
           </ListItemButton>
         </ListItem>
       </List> */}
-      <List onClick={() => navigate('/profile')}>
-        <ListItem className='py-1 px-2'>
-          <ListItemButton>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Profile'} />
-          </ListItemButton>
-        </ListItem>
-      </List>
+      {user?.role ?
+        <List onClick={() => navigate('/profile')}>
+          <ListItem className='py-1 px-2'>
+            <ListItemButton>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Profile'} />
+            </ListItemButton>
+          </ListItem>
+        </List> : ''
+      }
       {
         localStorage.getItem('token') ?
           <List onClick={() => navigate('/logout')}>

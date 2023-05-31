@@ -52,8 +52,8 @@ async function get_promocode(slug) {
 async function post_promocode(slug, promocode) {
     return await Axios().post(`api/v1/edu/promo-code/${slug}/`, promocode)
 }
-async function patch_promocode(slug, promocode) {
-    return await Axios().patch(`api/v1/edu/promo-code/${slug}/`, promocode)
+async function patch_promocode(slug, id, promocode) {
+    return await Axios().patch(`api/v1/edu/promo-code/${slug}/${id}/`, promocode)
 }
 async function delete_promocode(slug, id) {
     return await Axios().deleteItem(`api/v1/edu/promo-code/${slug}/${id}/`)
@@ -82,9 +82,6 @@ async function delete_question(slug, id) {
 export { get_question_all, add_question, get_question_detail, patch_question, delete_question }
 
 // Answers
-// async function get_question_all(slug) {
-//     return await Axios().get(`api/v1/question/edu-questions/${slug}`)
-// }
 async function get_answer_all(slug) {
     return await Axios().get(`api/v1/question/edu-answers/${slug}/`)
 }
@@ -102,4 +99,8 @@ async function delete_answer(slug, id, id_answer) {
 }
 export { add_answer, get_answer_all, get_answer_detail, update_answer, delete_answer }
 
-
+// participants 
+async function get_connect_comp() {
+    return await Axios().get(`api/v1/participation/connect-competition/`)
+}
+export { get_connect_comp }
